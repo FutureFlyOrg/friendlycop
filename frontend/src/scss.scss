@@ -15,3 +15,39 @@
 }
 
 }
+.Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: chocolate;
+    font-family: none;
+    font-style:italic;
+
+  .images{
+      height:50px;
+  }
+  .Name{
+      margin-top:16px;
+      h3{
+        font-size: 1.25rem;
+      }
+  }
+  .logout{
+      position: relative;
+      left:70px;
+      top:1px;
+      .logout-img{
+        height:29px;
+      }
+  }
+}
+.MainContent{
+    margin-top:50%;
+
+}
+.button-register{
+    background-color: chocolate;
+    border: 11px solid chocolate;
+    border-radius:17px;
+    width:175px;
+}
