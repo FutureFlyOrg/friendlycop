@@ -1,4 +1,6 @@
 import RegisterView from '../pages/Register/view/RegisterView'
+import CaptureImageView from '../pages/CaptureImage/view/CaptureImageView';
+
 
 export default [
     {
@@ -9,6 +11,10 @@ export default [
     {
         path: '/RegisterView',
         component: RegisterView
+    },
+    {
+        path: '/CaptureImageView',
+        component: CaptureImageView
     } 
 
 ]
