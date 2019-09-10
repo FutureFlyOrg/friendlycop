@@ -1,0 +1,15 @@
+.login-wrapper {
+    padding: 1rem;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    // justify-content: center;
+    .logo {
+        width: 150px;
+        // margin: auto;
+    }
+    .text-group {
+        border-left: solid 5px;
+        padding-left: 1rem;
+    }
+}

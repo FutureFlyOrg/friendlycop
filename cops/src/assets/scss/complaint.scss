@@ -1,0 +1,36 @@
+.complaint-list {
+
+    .complaint-item {
+        padding:0;
+        display: flex;
+        .image {
+            width: 100px;
+            background-size: cover;
+            background-position: center center;
+        }
+        .content {
+            padding: .25rem .5rem;
+            .title{
+                font-weight: bold;
+            }
+            .description {
+
+            }
+        }
+        .status{
+            width: .5rem;
+            &.queue {
+                background-color: #dc3545;
+            }
+            &.action-taken {
+                background-color: #ffc107;
+            }
+            &.in-progress {
+                background-color: #17a2b8
+            }
+            &.completed {
+                background-color: #28a745
+            }
+        }
+    }
+}
