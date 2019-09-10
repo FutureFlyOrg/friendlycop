@@ -112,7 +112,7 @@ class CaptureImageView extends Component {
             <div>
                 {this.state.Capture ?
                     <canvas id="canvas" style={{ alignItems: 'center' }}>
-                    </canvas> : <canvas id="canvas" style={{ alignItems: 'center', display: 'none' }}> </canvas>}
+                    </canvas> : <canvas id="canvas" style={{ alignItems: 'center' }}> </canvas>}
                 <video width='100%' height='120' id="video">Video stream not available.</video>
                 <div className='col'>
                     <Textbox label={''}
