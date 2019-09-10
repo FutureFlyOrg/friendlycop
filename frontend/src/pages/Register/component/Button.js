@@ -6,7 +6,7 @@ class Button extends Component{
         return (
             <button 
             type="button" 
-            class={"btn btn-primary"} 
+            class={className?className:"btn btn-primary"} 
             onClick={onClick}>
             {btnName}
             </button>

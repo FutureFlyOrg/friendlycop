@@ -1,5 +1,6 @@
 import React , {Component} from 'react'
 import Button from '../component/Button';
+import Header from '../../Header/Header';
 
 class RegisterView extends Component{
 
@@ -8,9 +9,11 @@ class RegisterView extends Component{
     }
     render(){
         
-        return ( <div>
-            <Button btnName = "Register" onClick={this.clicked}/>
-            
+        return ( <div className="Main">
+            <Header logout={true}/>
+            <div className="MainContent">
+            <Button btnName = "Register" className={"button-register"} onClick={this.clicked}/>
+            </div>
         </div> ) 
     }
 }

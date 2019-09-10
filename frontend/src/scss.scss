@@ -4,6 +4,7 @@
     align-items: center;
     min-height: 100vh ;
     width: 100%;
+    
 
 .App{
     // display: flex ;
@@ -11,8 +12,48 @@
     height: 500px;
     margin: 10px;
      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4) ;  // x y blur color
-  
+     
 
 }
 
+}
+
+.Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+    font-family: none;
+    font-style:italic;
+    background-image: url('background.png');
+
+  .images{
+      height:70px;
+  }
+  .Name{
+      margin-top:16px;
+      margin-left:12px;
+      h3{
+        font-size: 1.75rem;
+        font-weight: bold;
+      }
+  }
+  .logout{
+      position: relative;
+      left:70px;
+      top:1px;
+      .logout-img{
+        height:29px;
+      }
+  }
+}
+.MainContent{
+    margin-top:50%;
+
+}
+.button-register{
+    background-color: chocolate;
+    border: 11px solid chocolate;
+    border-radius:17px;
+    width:175px;
 }
