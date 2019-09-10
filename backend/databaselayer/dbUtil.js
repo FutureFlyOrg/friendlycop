@@ -62,25 +62,6 @@ module.exports.updateData = function(collectionName, query, updateObject){
     });
 }
 
-module.exports.findLogin = function(collectionName, query){
-    return new Promise((resolve, reject) => {
-        try{
-            let collection = db.collection(collectionName);
-            collection.where('username', "==", query.username);
-            collection.where('password', "==", query.password).get().then((data) => {
-                resolve(data);
-            }).catch((err) => {
-                reject(err);
-            });
-        }
-        catch(err){
-            reject("Error while fetching data from " + collectionName + " Error " + err);
-        } 
-        
-
-    });
-}
-
 module.exports.findAll = function(collectionName){
     return new Promise((resolve, reject) => {
         try{
