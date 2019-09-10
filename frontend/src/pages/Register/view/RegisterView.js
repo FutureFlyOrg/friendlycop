@@ -9,8 +9,8 @@ class RegisterView extends Component{
     }
     render(){
         
-        return ( <div>
-            <Header logout={false}/>
+        return ( <div className="Main">
+            <Header logout={true}/>
             <div className="MainContent">
             <Button btnName = "Register" className={"button-register"} onClick={this.clicked}/>
             </div>
