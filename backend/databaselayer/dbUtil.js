@@ -19,22 +19,65 @@ module.exports.establishConnection = function(){
     });   
 }
 
-module.exports.find = function(collectionName, query){
-    return new Promise((resolve, reject) => {
-        let collection = db.collection(collectionName);
-        collection.get().then((data) => {
-            resolve(data);
-        });
-
-    });
-}
-
 module.exports.findByCondition = function(collectionName, keyname, value, condition){
     return new Promise((resolve, reject) => {
         let collection = db.collection(collectionName);
         collection.where(keyname, condition, value).get().then((data) => {
             resolve(data);
         });
+    });
+}
+
+module.exports.insertData = function(collectionName, id, insertObject){
+    return new Promise((resolve, reject) => {
+        try{
+            db.collection(collectionName).doc(id).set(insertObject).then((res) => {
+                resolve("inserted");
+            }).catch((err) => {
+                reject(err);
+            });
+        }
+        catch(err){
+            reject("Error while inserting data into " + collectionName + " Error " + err);
+        }        
+    });
+}
+
+module.exports.updateData = function(collectionName, query, updateObject){
+    return new Promise((resolve, reject) => {
+        try{
+            let collection = db.collection(collectionName);
+            collection.doc(query).update(updateObject, (error) => {
+                if(error){
+                    reject(error);
+                }
+                else{
+                    resolve("Updated Successfully");
+                }
+            });
+        }
+        catch(err){
+            reject("Error while updating data into " + collectionName + " Error " + err);
+        } 
+    });
+}
+
+module.exports.findLogin = function(collectionName, query){
+    return new Promise((resolve, reject) => {
+        try{
+            let collection = db.collection(collectionName);
+            collection.where('username', "==", query.username);
+            collection.where('password', "==", query.password).get().then((data) => {
+                resolve(data);
+            }).catch((err) => {
+                reject(err);
+            });
+        }
+        catch(err){
+            reject("Error while fetching data from " + collectionName + " Error " + err);
+        } 
+        
+
     });
 }
 
@@ -49,43 +92,5 @@ module.exports.findAll = function(collectionName){
         catch(err){
             reject("Error while fetching data from " + collectionName + " Error " + err);
         }
-    });
-}
-
-module.exports.insertData = function(collectionName, insertObject){
-    return new Promise((resolve, reject) => {
-        try{
-            let collection = db.ref(collectionName);
-            collection.push(insertObject, (error) => {
-                if(error){
-                    reject(error);
-                }
-                else{
-                    resolve("Inserted Successfully");
-                }
-            });
-        }
-        catch(err){
-            reject("Error while inserting data into " + collectionName + " Error " + err);
-        }        
-    });
-}
-
-module.exports.updateData = function(collectionName, query, updateObject){
-    return new Promise((resolve, reject) => {
-        try{
-            let collection = db.ref(collectionName);
-            collection.child(query).update(updateObject, (error) => {
-                if(error){
-                    reject(error);
-                }
-                else{
-                    resolve("Updated Successfully");
-                }
-            });
-        }
-        catch(err){
-            reject("Error while updating data into " + collectionName + " Error " + err);
-        } 
     });
 }
