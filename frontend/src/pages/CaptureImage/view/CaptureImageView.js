@@ -13,6 +13,7 @@ class CaptureImageView extends Component {
         location: '',
         comment: ''
     }
+    
     startup() {
         this.setState({
             Capture: false
