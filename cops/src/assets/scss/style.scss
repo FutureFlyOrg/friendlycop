@@ -2,7 +2,13 @@
 @import './login.scss';
 @import './complaint.scss';
 
-.page-header {
+#app-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.app-header {
     display: flex;
     padding: .5rem 0;
     align-items: center;
@@ -12,6 +18,11 @@
     }
     .content {
     }
+}
+
+.app-content {
+    overflow: auto;
+    flex: 1;
 }
 
 .pointer {

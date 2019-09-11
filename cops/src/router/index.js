@@ -3,6 +3,7 @@ import { lazy } from 'react'
 const Login = lazy(() => import('../views/Login'))
 const Register = lazy(() => import('../views/Register'))
 const Complaints = lazy(() => import('../views/Complaints'))
+const ComplaintsDetails = lazy(() => import('../views/ComplaintsDetails'))
 
 
 export default [
@@ -22,6 +23,10 @@ export default [
     {
         path: '/complaints',
         component: Complaints,
+    },
+    {
+        path: '/complaints-details',
+        component: ComplaintsDetails,
     },
     
 ]

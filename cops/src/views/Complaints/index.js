@@ -1,61 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import Header from '../../layout/Header';
+import { SET_COMPLAINT_DETAILS } from '../ComplaintsDetails/constants';
 
-const list = [
-    {
-        title: 'Li Europan lingues',
-        description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-        image: 'https://via.placeholder.com/150',
-        loaction: {
-            latitude: 12.978622,
-            longitude: 80.243273
-        },
-        status: 'QUEUE'
-    },
-    {
-        title: 'A wonderful serenity has taken possession',
-        description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-        image: 'https://via.placeholder.com/150',
-        loaction: {
-            latitude: 12.978622,
-            longitude: 80.243273
-        },
-        status: 'ACTION_TAKEN'
-    },
-    {
-        title: 'One morning, when Gregor Samsa woke from troubled',
-        description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-        image: 'https://via.placeholder.com/150',
-        loaction: {
-            latitude: 12.978622,
-            longitude: 80.243273
-        },
-        status: 'IN_PROGRESS'
-    },
-    {
-        title: 'One morning, when Gregor Samsa woke from troubled',
-        description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-        image: 'https://via.placeholder.com/150',
-        loaction: {
-            latitude: 12.978622,
-            longitude: 80.243273
-        },
-        status: 'COMPLETED'
-    },
-    {
-        title: 'A wonderful serenity has taken possession',
-        description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-        image: 'https://via.placeholder.com/150',
-        loaction: {
-            latitude: 12.978622,
-            longitude: 80.243273
-        },
-        status: 'ACTION_TAKEN'
-    },
-]
-
-const Login = props => {
+const Complaints = props => {
+    let { list } = props;
     let goBack = () => props.history.goBack();
+    // Action
+    let { setComplaintDetails } = props;
+
+    let moveComplaintDetails = (complaint) => {
+        setComplaintDetails(complaint)
+        props.history.push('/complaints-details');
+    }
     return (
         <>
             <Header title="Friendlycop" subTitle="Complaint List" onBack={goBack} />
@@ -64,12 +21,16 @@ const Login = props => {
                     list.map((item, inx) => {
                         let { status, image, title, description } = item;
                         return (
-                            <div className="complaint-item list-group-item" key={'complaint-item' + inx}>
-                                <div className="image" style={{backgroundImage:`url(${image})`}}>
+                            <div
+                                className="complaint-item list-group-item"
+                                onClick={() => moveComplaintDetails(item)}
+                                key={'complaint-item' + inx}
+                            >
+                                <div className="image" style={{ backgroundImage: `url(${image})` }}>
                                 </div>
                                 <div className="content">
-                                    <div className="title">{title.substring(0,30)}</div>
-                                    <div className="description text-sec">{description.substring(0,50)}</div>
+                                    <div className="title">{title.substring(0, 30)}</div>
+                                    <div className="description text-sec">{description.substring(0, 50)}</div>
                                 </div>
                                 <div className={"status " + status.toLowerCase().replace(/_/g, '-')}></div>
                             </div>
@@ -81,4 +42,14 @@ const Login = props => {
     )
 }
 
-export default Login;
+const mapStateToProps = ({ Complaints }) => ({
+    ...Complaints
+})
+const mapDispatchToProps = dispatch => ({
+    setComplaintDetails: payload => dispatch({
+        type: SET_COMPLAINT_DETAILS,
+        payload
+    })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Complaints);

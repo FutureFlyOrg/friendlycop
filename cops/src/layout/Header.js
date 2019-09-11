@@ -3,7 +3,7 @@ import React from 'react';
 const Header = props => {
     let { title = "", subTitle = "",onBack=()=>{} } = props;
     return (
-        <div className="page-header shadow bg-primary text-white">
+        <div className="app-header shadow bg-primary text-white">
             <div className="back" onClick={onBack}>
                 <i className="fas fa-arrow-left"></i>
             </div>
