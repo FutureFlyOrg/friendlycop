@@ -39,7 +39,7 @@
       height:70px;
   }
   .Name{
-      margin-top:16px;
+    //   margin-top:16px;
       margin-left:12px;
       h3{
         font-size: 1.75rem;
@@ -48,7 +48,7 @@
   }
   .logout{
       position: relative;
-      left:70px;
+      left:50px;
       top:1px;
       .logout-img{
         height:29px;
@@ -63,11 +63,27 @@
     color: #ffffff;
     height: 50px;
      background-image: url('background.png');
+     .Name{
+        //   margin-top:16px;
+          margin-left:12px;
+          h3{
+            font-size: 1.75rem;
+            font-weight: bold;
+          }
+      }
+      .logout{
+          position: relative;
+          left:50px;
+          top:1px;
+          .logout-img{
+            height:29px;
+          }
+      }
 }
-.MainContent{
-    margin-top:50%;
+// .MainContent{
+//     margin-top:50%;
 
-}
+// }
 .button-botom{
     margin-bottom: 12px;
 }
