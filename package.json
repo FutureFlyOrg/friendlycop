@@ -18,6 +18,7 @@
   "homepage": "https://github.com/FutureFlyOrg/friendlycop#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "firebase-admin": "^8.5.0"
+    "firebase-admin": "^8.5.0",
+    "update-node": "^0.1.0"
   }
 }

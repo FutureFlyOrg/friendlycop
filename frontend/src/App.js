@@ -7,12 +7,16 @@ import {HashRouter , Switch , Route} from  'react-router-dom'
 
 import Routes from './router'
 import './scss.scss';
+import Header from './pages/Header/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
    <HashRouter>
+      
       <div className="display">
         <div className='App'>
+          <Header logout={true} />
      <Switch>
        {
           Routes.map((item , index)=>{
@@ -23,6 +27,8 @@ function App() {
           })
        }
      </Switch>
+
+          <Footer />
      </div>
       </div>>
    </HashRouter>
