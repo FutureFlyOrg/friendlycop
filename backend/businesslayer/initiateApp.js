@@ -1,4 +1,4 @@
-const dbUtil = require('../databaselayer/dbUtil')
+const dbUtil = require('../databaselayer/dbUtil');
 
 module.exports.login = (req, res) => {
     dbUtil.findByCondition("UserDetails",  "username", req.body.username, "==").then((data) => {
@@ -30,12 +30,21 @@ module.exports.register = (req, res) => {
 }
 
 module.exports.checkUsernameAvailability = (req, res) => {
-    dbUtil.findByCondition("UserDetails", "username", req.body.username, "==").then((data) => {
-        if(data.empty){
-            res.send("Available")
-        }
-        else{
-            res.send("Not Available");
-        }
-    })
+    try{
+        dbUtil.findByCondition("UserDetails", "username", req.body.username, "==").then((data) => {
+            if(data.empty){
+                res.status(200).send({data: "success", id: req.body.username });
+            }
+            else{
+                res.status(200).send({data: "exists", id: [100,101,103] });
+            }
+        }).catch(err => {
+            console.log(err);
+            res.status(500).send({data: "error"});
+        });
+    }
+    catch(error){
+        console.log("Error in checkUsernameAvailability method. Error: " + error);
+        res.status(500).send({data: "error"});
+    }    
 }

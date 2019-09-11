@@ -62,6 +62,21 @@ module.exports.updateData = function(collectionName, query, updateObject){
     });
 }
 
+module.exports.createData = function(collectionName, insertObject){
+    return new Promise((resolve, reject) => {
+        try{
+            db.collection(collectionName).add(insertObject).then((res) => {
+                resolve("inserted");
+            }).catch((err) => {
+                reject(err);
+            });
+        }
+        catch(err){
+            reject("Error while inserting data into " + collectionName + " Error " + err);
+        }        
+    });
+}
+
 module.exports.findAll = function(collectionName){
     return new Promise((resolve, reject) => {
         try{
