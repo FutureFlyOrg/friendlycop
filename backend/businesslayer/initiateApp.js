@@ -32,10 +32,10 @@ module.exports.register = (req, res) => {
 module.exports.checkUsernameAvailability = (req, res) => {
     dbUtil.findByCondition("UserDetails", "username", req.body.username, "==").then((data) => {
         if(data.empty){
-            res.send("Available")
+            res.send({message: "Success",data:"Available"})
         }
         else{
-            res.send("Not Available");
+            res.send({message: "Success",data:"Not Available"});
         }
     })
 }
