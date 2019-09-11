@@ -10,7 +10,8 @@ class Header extends Component {
     render() {
 
         return (
-            <div className="Header">
+            
+                    <div class="card-header Header">
                 {/* <div className="logo">
                     <img src={logo} className="images" height={13}/>
                 </div> */}
@@ -23,6 +24,7 @@ class Header extends Component {
                     <i class="fa fa-sign-out" aria-hidden="true"></i></div> */}
 
                 </div>:""}
+                
             </div>
         )
     }

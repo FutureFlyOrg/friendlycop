@@ -1,9 +1,19 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
-const initiateApp = require('./businesslayer/initiateApp')
+const initiateApp = require('./businesslayer/initiateApp');
+const compliants = require('./businesslayer/compliants');
+const dbUtil = require("./databaselayer/dbUtil");
+
+dbUtil.establishConnection().then((data, err) =>{
+    if(err){
+        console.log(err);
+    }
+    else{
+        console.log(data);
+    }    
+});
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -18,6 +28,8 @@ app.use((req, res, next) => {
 app.post('/login', initiateApp.login);
 app.post('/register', initiateApp.register);
 app.post('/checkUsernameAvailability', initiateApp.checkUsernameAvailability);
+app.post('/getCompliantsByUsername', compliants.getCompliantsByUsername);
+app.post('/createCompliant', compliants.createCompliant);
 
 app.listen(1330, () => {
     console.log('Started listening to Port ' + 1330);
