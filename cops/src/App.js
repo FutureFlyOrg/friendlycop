@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom'
 import routers from './router';
 import './assets/scss/style.scss';
@@ -6,7 +6,7 @@ import './assets/scss/style.scss';
 function App() {
     return (
         <HashRouter>
-            <Suspense fallback={<div>Please wait...</div>}>
+            {/* <Suspense fallback={<div>Please wait...</div>}> */}
                 <Switch>
                     {routers.map((router, inx) => {
                         let { component: DisplayComponent, ...options } = router;
@@ -23,7 +23,7 @@ function App() {
                         )
                     })}
                 </Switch>
-            </Suspense>
+            {/* </Suspense> */}
         </HashRouter>
     );
 }

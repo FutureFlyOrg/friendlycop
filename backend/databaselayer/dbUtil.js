@@ -90,3 +90,20 @@ module.exports.findAll = function(collectionName){
         }
     });
 }
+
+module.exports.getAll = collection => {
+    return new Promise((resolve,reject) => {
+        try {
+            db.collection(collection)
+                .get()
+                .then(snapshot => snapshot.docs.map(doc => doc.data()))
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        }
+        catch (err) {
+            reject(err)
+        }
+    })
+}
+
+module.exports.db = db;

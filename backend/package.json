@@ -19,7 +19,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "firebase-admin": "^8.5.0",
+    "md5": "^2.2.1",
     "react-google-maps": "^9.4.5",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "uuid": "^3.3.3"
   }
 }

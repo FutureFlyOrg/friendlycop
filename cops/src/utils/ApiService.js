@@ -11,9 +11,9 @@ const request = {
 }
 
 const auth = {
-    login: body => request.post('/login',body),
-    checkUser: body => request.post('/checkUsernameAvailability',body),
-    register: body => request.post('/register',body)
+    login: body => request.post('/cops/login',body),
+    checkUser: body => request.post('/cops/checkAvailability',body),
+    register: body => request.post('/cops',body)
 }
 
 export {

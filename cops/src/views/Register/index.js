@@ -8,13 +8,14 @@ const Login = props => {
         error: '',
         isExisting: true
     })
-    let { inProgress, error,isExisting } = state;
+    let { inProgress, error, isExisting } = state;
     const onRegister = e => {
         e.preventDefault();
-        let { username, password } = e.target;
+        let { username, password, name } = e.target;
         let registerBody = {
             username: username.value,
-            password: password.value
+            password: password.value,
+            name: name.value
         }
         if (registerBody.username === '' || registerBody.password === '') {
             setState({
@@ -23,11 +24,11 @@ const Login = props => {
             })
             return
         }
-        if(isExisting) {
+        if (isExisting) {
             setState({
                 ...state,
                 isExisting: true,
-                error:'Not Available'
+                error: 'Not Available'
             })
             return
         }
@@ -40,19 +41,20 @@ const Login = props => {
                 ...state,
                 inProgress: false
             })
-            if(res.message === 'Success') {
+            if (res.status === 'success') {
+                localStorage.setItem('id',res.id);
                 props.history.push('/complaints')
             }
         })
-        
+
     }
     const checkUserAvailable = e => {
-        let { value:username } = e.target;
-        auth.checkUser({username}).then(res => {
+        let { value: username } = e.target;
+        auth.checkUser({ username }).then(res => {
             setState({
                 ...state,
-                isExisting: res.data === "Not Available",
-                error: res.data === "Not Available" ? res.data : ''
+                isExisting: res.status === "error",
+                error: res.status === "error" ? res.data : ''
             })
         })
     }
@@ -69,6 +71,9 @@ const Login = props => {
                 <div className="text-group border-primary">
                     <h2><b>Wellcome,</b></h2>
                     <h3 className="text-secondary mb-5">Create account a new to continue</h3>
+                </div>
+                <div className="form-group">
+                    <input type="name" name="name" className="form-control form-control-lg" placeholder="Full Name" />
                 </div>
                 <div className="form-group">
                     <input type="name" name="username" className="form-control form-control-lg" placeholder="Username" onBlur={checkUserAvailable} />

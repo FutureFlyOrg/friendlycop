@@ -32,13 +32,14 @@ const Login = props => {
                 ...state,
                 inProgress: false
             })
-            if (res.message === 'valid') {
-                props.history.push('/complaints')
+            if (res.status === 'success') {
+                localStorage.setItem('id',res.data.id);
+                props.history.push('/complaints');
             }
             else {
                 setState({
                     ...state,
-                    error: res.message
+                    error: res.data
                 })
             }
         })
