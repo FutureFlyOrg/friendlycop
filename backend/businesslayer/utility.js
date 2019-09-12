@@ -1,4 +1,4 @@
-module.exports.generateRandomString = function(){
+function generateRandomString(){
     let random_string = '';
     let random_ascii;
     for(let i = 0; i < 3; i++) {
@@ -8,23 +8,30 @@ module.exports.generateRandomString = function(){
     return random_string;
 }
 
-let username = "suganya";
-let len = username.length;
-console.log(len);
-let ran = Math.random();
-console.log(ran);
-let num = Math.floor(ran*100000);
-console.log(num);
 
 module.exports.Suggestions = function(username){
-    let usernameLen = username.length;
-    if(usernameLen < 15 && usernameLen > 10){
-
-    }
-    else if(usernameLen <= 10 ){
-        let totallen = 15 - (usernameLen + 3)
-        let currenttime = new Date().getTime();
-        let number = currenttime%1000;
-    }
-    
+    return new Promise((resolve, reject) => {
+        let usernameLen = username.length;
+        if(usernameLen < 15 || usernameLen > 10){
+            let name = username.substring(0,10);
+            let totallen = 15 - (name.length + 3);
+            let currenttime = new Date().getTime();
+            let number = currenttime.toString().slice(totallen * -1)
+            let suggname =  name + number + generateRandomString();
+            console.log(suggname);
+            resolve(suggname);
+        }
+        else if(usernameLen <= 10 ){
+            let totallen = 15 - (usernameLen + 3)
+            let currenttime = new Date().getTime();
+            let number = currenttime.toString().slice(totallen * -1)
+            let suggname =  username + number + generateRandomString();
+            console.log(suggname);
+            resolve(suggname);
+        } 
+        else{
+            console.log("nothing")
+        } 
+    })      
 }
+
