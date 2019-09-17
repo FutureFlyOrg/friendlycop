@@ -19,7 +19,7 @@ function App() {
           <div class="container display">
             <div class="card App">
 
-              <Header logout={true} />
+              {/* <Header logout={true} /> */}
               <div className="card-body">
               <Switch>
                 {
@@ -32,7 +32,7 @@ function App() {
                 }
               </Switch>
               </div>
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </div>
         {/* </div>

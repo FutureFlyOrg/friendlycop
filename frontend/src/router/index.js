@@ -1,9 +1,10 @@
 import RegisterView from '../pages/Register/view/RegisterView'
 import CaptureImageView from '../pages/CaptureImage/view/CaptureImageView';
 import ComplaintPageView from '../pages/ComplaintPage/view/ComplaintPageView';
+import NewRegister from '../pages/Register/component/NewRegister';
 
 
-export default [ 
+export default [  
     {
         path : '/',
         component : RegisterView ,
@@ -20,6 +21,11 @@ export default [
     {
         path: '/ComplaintPageView',
         component: ComplaintPageView
+    } ,
+    {
+        path: '/NewRegister',
+        component: NewRegister
     } 
+
 
 ]
