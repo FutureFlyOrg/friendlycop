@@ -38,7 +38,7 @@ module.exports.createCompliant = function(req, res){
             "image": req.body.image,
             "comments": req.body.comments,
             "username": req.body.username,
-            "location": new firebase.firestore.GeoPoint(12.98432, 80.25894),
+            "location": req.body.location,
             "datetime": new Date(),
             "status": "QUEUE"
         }
