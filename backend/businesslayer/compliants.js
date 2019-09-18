@@ -1,5 +1,6 @@
 const dbUtil = require('../databaselayer/dbUtil');
 const firebase = require("firebase-admin");
+const uuidv1 = require('uuid/v1');
 
 module.exports.getCompliantsByUsername = function(req, res){
     try{
@@ -34,20 +35,30 @@ module.exports.getCompliantsByUsername = function(req, res){
 
 module.exports.createCompliant = function(req, res){
     try{
-        let compDetails = {
-            "image": req.body.image,
-            "comments": req.body.comments,
-            "username": req.body.username,
-            "location": new firebase.firestore.GeoPoint(12.98432, 80.25894),
-            "datetime": new Date(),
-            "status": "QUEUE"
+        let { image:imgBase64, comments, username } = req.body;
+        compDetails = {
+            comments,
+            username,
+            location: new firebase.firestore.GeoPoint(12.98432, 80.25894),
+            datetime: new Date(),
+            status: "QUEUE",
+            actionBy: ""
         }
-        dbUtil.createData("Compliants", compDetails).then(data => {
-            res.status(200).send({"data": "success", "details": data.id})
-        }).catch(err => {
-            console.log(err);
-            res.status(500).send({"data": "error", "details": "unable to create "});
-        });
+        let path = `images/`;
+        let name = `${username}-${(Math.random()*100000000000000000).toString(36)}.jpg`
+        dbUtil.uploadFile(imgBase64, path, name).then(image => {
+            compDetails['image'] = image;
+            dbUtil.insertData("Compliants", compDetails).then(id => {
+                res.status(200).send({
+                    status: 'success',
+                    data: { id, ...compDetails }
+                })
+            }).catch(err => {
+                console.log(err);
+                res.status(500).send({ "data": "error", "details": "unable to create " });
+            });
+        })
+
     }
     catch(error){
         console.log(error);

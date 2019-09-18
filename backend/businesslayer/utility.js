@@ -28,3 +28,8 @@ module.exports.Suggestions = function(username){
     }
     
 }
+
+module.exports.bindRes = (err = false, data, res) => res.json({
+    status: err ? 'error' : 'success',
+    data
+})

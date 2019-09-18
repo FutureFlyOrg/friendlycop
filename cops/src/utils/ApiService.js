@@ -16,6 +16,12 @@ const auth = {
     register: body => request.post('/cops',body)
 }
 
+const compliants = {
+    all: body => request.post('/cops/compliants',body),
+    updateStatus: (id,body) => request.post(`/cops/changeStatus/${id}`,body)
+}
+
 export {
-    auth
+    auth,
+    compliants
 }

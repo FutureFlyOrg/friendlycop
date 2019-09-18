@@ -1,14 +1,17 @@
-import { SET_COMPLAINT_DETAILS } from "./constants"
+import { SET_COMPLAINT_DETAILS, UPDATE_COMPLAINT_STATUS } from "./constants"
 
 const defaultState = {
-    title: 'Li Europan lingues',
-    description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-    image: 'https://via.placeholder.com/800x400',
-    loaction: {
-        latitude: 12.978622,
-        longitude: 80.243273
+    id: '',
+    actionBy: "47a2e550-d53d-11e9-9c17-e96c12a77f03",
+    comments: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+    datetime: { _seconds: 1568636921, _nanoseconds: 359000000 },
+    image: "https://firebasestorage.googleapis.com/v0/b/friendlycop-4981d.appspot.com/o/images%2F1001-p7pml9ygeqo.jpg?alt=media&token=844be9f0-d87d-11e9-af21-0ba2eac8b2dd",
+    location: {
+        _latitude: 12.98432,
+        _longitude: 80.25894
     },
-    status: 'QUEUE'
+    status: "ACTION_TAKEN",
+    username: "1001"
 }
 
 const ComplaintDetails = (state = defaultState, { type, payload, ...action }) => {
@@ -17,6 +20,11 @@ const ComplaintDetails = (state = defaultState, { type, payload, ...action }) =>
             return {
                 ...state,
                 ...payload
+            }
+        case UPDATE_COMPLAINT_STATUS:
+            return {
+                ...state,
+                status: payload
             }
         default:
             return state

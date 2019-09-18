@@ -3,6 +3,8 @@ const router = express.Router();
 const dbUtil = require('../databaselayer/dbUtil');
 const uuidv1 = require('uuid/v1');
 const md5 = require('md5');
+const axios = require('axios');
+const { bindRes } = require('./utility');
 
 const collection = "CopsDetails";
 
@@ -23,57 +25,39 @@ router.post('/', (req, res) => {
         username,
         password: md5(password),
     }
-
+    let errMsg = `The Username of ${username} already existed, Try a different username.`;
     checkValidCop(username).then(({ empty = false }) => {
         if (empty) {
             dbUtil.insertData(collection, id, copDetails).then(data => {
                 delete copDetails.password
-                res.json({
-                    status: 'success',
-                    data: { ...copDetails }
-                });
+                bindRes(false, copDetails, res);
             }).catch(err => {
-                res.json({
-                    status: "error",
-                    data: err
-                })
+                bindRes(true, err, res)
             })
         }
         else {
-            res.json({
-                status: "error",
-                data: `The Username of ${username} already existed, Try a different username.`
-            })
+            bindRes(true, errMsg, res)
         }
     }).catch(err => {
-        res.json({
-            status: "error",
-            data: `The Username of ${username} already existed, Try a different username.`
-        })
+        bindRes(true, errMsg, res)
     })
 })
 
 router.post('/checkAvailability', (req, res) => {
     let { username } = req.body;
+    let errMsg = `The Username of ${username} already existed, Try a different username.`;
     checkValidCop(username).then(({ empty }) => {
         if (empty) {
-            res.json({
-                status: "success",
-                data: `The Username of ${username} is available`
-            })
+            let msg = `The Username of ${username} is available`
+            bindRes(false, msg, res);
         }
         else {
-            res.json({
-                status: "error",
-                data: `The Username of ${username} already existed, Try a different username.`
-            })
+            bindRes(true, errMsg, res);
         }
 
     }).catch(err => {
-        res.json({
-            status: "error",
-            data: `The Username of ${username} already existed, Try a different username.`
-        })
+
+        bindRes(true, errMsg, res);
     })
 })
 
@@ -81,42 +65,49 @@ router.post('/login', (req, res) => {
     let { username, password } = req.body;
     checkValidCop(username).then(snapshot => {
         if (snapshot.empty) {
-            res.json({
-                status: 'error',
-                data: 'Inalid Username'
-            })
+            bindRes(true, 'Inalid Username', res);
         }
         else {
             snapshot.forEach(doc => {
                 let data = doc.data();
                 if (data.password == md5(password)) {
                     delete data.password
-                    res.json({
-                        status: 'success',
-                        data
-                    })
+                    bindRes(false, data, res);
                 }
                 else {
-                    res.json({
-                        status: 'error',
-                        data: 'Inalid Password'
-                    })
+                    bindRes(true, 'Inalid Password', res);
                 }
             })
         }
-    }).catch(err => {
-        res.json({
-            status: 'error',
-            data: 'Something went wrong'
-        })
-    })
+    }).catch(err => bindRes(true, err, res))
 })
 
 router.post('/compliants', (req, res) => {
-    dbUtil.getAll('Compliants').then(snapshot => {
-        res.json(snapshot)
+    let { token = 'none' } = req.body;
+    axios.all([
+        dbUtil.findByCondition('Compliants', 'status', 'QUEUE', '=='),
+        dbUtil.findByCondition('Compliants', 'actionBy', token, '=='),
+    ]).then(results => {
+        let [res1, res2] = results;
+        let finalResult = [];
+        if (!res1.empty) {
+            res1.forEach(doc => finalResult.push({ id: doc.id, ...doc.data() }))
+        }
+        if (!res2.empty) {
+            res2.forEach(doc => finalResult.push({ id: doc.id, ...doc.data() }))
+        }
+        bindRes(false, finalResult, res);
+    }).catch(err => bindRes(true, err, res))
+})
+
+router.post('/changeStatus/:id', (req, res) => {
+    let { id } = req.params;
+    let { status, actionBy } = req.body;
+    dbUtil.updateData('Compliants', `${id}`, { status, actionBy }).then(result => {
+        let msg = "Updated successfully";
+        bindRes(false, msg, res);
     }).catch(err => {
-        res.json({err})
+        bindRes(true, err, res)
     })
 })
 
