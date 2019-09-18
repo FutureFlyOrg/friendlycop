@@ -1,0 +1,1 @@
+export const SET_COMPLAINTS_LIST = "SET_COMPLAINTS_LIST"; 

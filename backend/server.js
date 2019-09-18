@@ -5,6 +5,7 @@ const app = express();
 const initiateApp = require('./businesslayer/initiateApp');
 const compliants = require('./businesslayer/compliants');
 const dbUtil = require("./databaselayer/dbUtil");
+const copsModule = require('./businesslayer/copsModule')
 
 dbUtil.establishConnection().then((data, err) =>{
     if(err){
@@ -30,6 +31,7 @@ app.post('/register', initiateApp.register);
 app.post('/checkUsernameAvailability', initiateApp.checkUsernameAvailability);
 app.post('/getCompliantsByUsername', compliants.getCompliantsByUsername);
 app.post('/createCompliant', compliants.createCompliant);
+app.use('/cops', copsModule)
 
 app.listen(1330, () => {
     console.log('Started listening to Port ' + 1330);

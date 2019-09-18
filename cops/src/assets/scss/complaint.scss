@@ -1,0 +1,51 @@
+.complaint-list {
+
+    .complaint-item {
+        padding:0;
+        display: flex;
+        height: 5rem;
+        .image {
+            flex-shrink: 0;
+            width: 80px;
+            background-size: cover;
+            background-position: center center;
+        }
+        .content {
+            width: 100%;
+            padding: .25rem .5rem;
+            .title{
+                font-weight: bold;
+                overflow: hidden;
+                height: 100%;
+            }
+            .description {
+
+            }
+        }
+        .status{
+            width: .5rem;
+            &.queue {
+                background-color: #dc3545;
+            }
+            &.action-taken {
+                background-color: #ffc107;
+            }
+            &.in-progress {
+                background-color: #17a2b8
+            }
+            &.completed {
+                background-color: #28a745
+            }
+        }
+    }
+}
+
+.no-results {
+    text-align: center;
+    opacity: .4;
+    margin: auto;
+    i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+}
