@@ -146,7 +146,7 @@ class CaptureImageView extends Component {
 
             }
         }
-        axios.post('http://192.168.0.32:1330/createCompliant',data).then((Response, err)=>{
+        axios.post('https://backend.futureflyorg.now.sh/createCompliant',data).then((Response, err)=>{
             if(Response.data.data == 'success'){
                 this.props.history.push('/ComplaintPageView')
             }

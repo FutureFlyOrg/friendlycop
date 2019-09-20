@@ -13,7 +13,7 @@ class RegisterView extends Component {
         alert('Clicked ..')
         var data = { username: this.state.userName }
         console.log('data ', data)
-        axios.post('http://192.168.0.32:1330/checkUsernameAvailability', data).then((Response, err) => {
+        axios.post('https://backend.futureflyorg.now.sh/checkUsernameAvailability', data).then((Response, err) => {
             console.log(Response, 'Res')
             if (Response.data.data == 'success') {
                 console.log('coming ..', this.props)

@@ -16,7 +16,7 @@ class ComplaintPageView extends Component{
     componentWillMount(){
         var data = {"username" :localStorage.getItem("username")}
 
-        axios.post('http://192.168.0.32:1330/getCompliantsByUsername', data).then((res , err)=>{
+        axios.post('https://backend.futureflyorg.now.sh/getCompliantsByUsername', data).then((res , err)=>{
             if(res.data.data){
                 var ss = res.data.data.details
                 this.setState({ list : ss})
