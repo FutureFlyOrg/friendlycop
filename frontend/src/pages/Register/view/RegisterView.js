@@ -13,7 +13,7 @@ class RegisterView extends Component {
         alert('Clicked ..')
         var data = { username: this.state.userName }
         console.log('data ', data)
-        axios.post('http://192.168.0.238:1330/checkUsernameAvailability', data).then((Response, err) => {
+        axios.post('http://192.168.0.32:1330/checkUsernameAvailability', data).then((Response, err) => {
             console.log(Response, 'Res')
             if (Response.data.data == 'success') {
                 console.log('coming ..', this.props)
@@ -75,7 +75,9 @@ class RegisterView extends Component {
                     <h6 style={{ color: 'gray', textAlign: 'right' , fontSize : 12 , marginBottom : '20%' }}>Forget password ? </h6>
                 </div>
                 <div item>
-                    <button type="button" className="btn btn-outline-primary btn-lg" style={{borderRadius : '20px' , width : '100%'}}>Login</button>
+                    <button type="button" className="btn btn-outline-primary btn-lg" style={{borderRadius : '20px' , width : '100%'}} onClick={
+                        this.clicked
+                    }>Login</button>
                     </div>
                 <div item>
                    <h6 style={{color : 'white'}}> -OR </h6>

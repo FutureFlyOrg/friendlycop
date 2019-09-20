@@ -16,8 +16,11 @@ class ComplaintPageView extends Component{
     componentWillMount(){
         var data = {"username" :localStorage.getItem("username")}
 
-        axios.post('http://192.168.0.238:1330/getCompliantsByUsername', data).then((res , err)=>{
-            console.log(res)
+        axios.post('http://192.168.0.32:1330/getCompliantsByUsername', data).then((res , err)=>{
+            if(res.data.data){
+                var ss = res.data.data.details
+                this.setState({ list : ss})
+            }
         })
     }
     registercomplaint=()=>{
@@ -75,7 +78,7 @@ class ComplaintPageView extends Component{
                         <div className = 'col' style={{color : 'white'}}>
                             <i class="fas fa-user-circle"></i>
                             </div>
-                        <div className='col' style={{ color: 'white' }}>
+                        <div className='col' onClick={this.registercomplaint} style={{ color: 'white' }}>
                             <i class="fas fa-plus-square"></i>
                         </div>
                         <div className='col' style={{ color: 'white' }}>
