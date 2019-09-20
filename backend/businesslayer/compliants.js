@@ -35,14 +35,13 @@ module.exports.getCompliantsByUsername = function(req, res){
 
 module.exports.createCompliant = function(req, res){
     try{
-        let { image:imgBase64, comments, username } = req.body;
-        compDetails = {
-            comments,
-            username,
-            location: new firebase.firestore.GeoPoint(12.98432, 80.25894),
-            datetime: new Date(),
-            status: "QUEUE",
-            actionBy: ""
+        let compDetails = {
+            "image": req.body.image,
+            "comments": req.body.comments,
+            "username": req.body.username,
+            "location": req.body.location,
+            "datetime": new Date(),
+            "status": "QUEUE"
         }
         let path = `images/`;
         let name = `${username}-${(Math.random()*100000000000000000).toString(36)}.jpg`

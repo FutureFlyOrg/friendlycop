@@ -33,10 +33,17 @@ module.exports.establishConnection = function () {
 
 module.exports.findByCondition = function (collectionName, keyname, value, condition) {
     return new Promise((resolve, reject) => {
-        let collection = db.collection(collectionName);
-        collection.where(keyname, condition, value).get().then((data) => {
-            resolve(data);
-        });
+        try{
+            let collection = db.collection(collectionName);
+            collection.where(keyname, condition, value).get().then((data) => {
+                resolve(data);
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+        catch(error){
+            console.log(error);
+        }        
     });
 }
 
@@ -76,7 +83,7 @@ module.exports.createData = function (collectionName, insertObject) {
     return new Promise((resolve, reject) => {
         try {
             db.collection(collectionName).add(insertObject).then((res) => {
-                resolve("inserted");
+                resolve(res);
             }).catch((err) => {
                 reject(err);
             });
