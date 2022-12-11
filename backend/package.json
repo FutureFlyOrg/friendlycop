@@ -18,7 +18,7 @@
   "homepage": "https://github.com/FutureFlyOrg/friendlycop#readme",
   "dependencies": {
     "axios": "^0.19.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase-admin": "^8.5.0",
     "md5": "^2.2.1",
     "react-google-maps": "^9.4.5",
